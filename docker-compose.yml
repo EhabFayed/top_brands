@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: tba_development
+      POSTGRES_DB: top_brand_development
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -24,7 +24,7 @@ services:
       - db
       - redis
     environment:
-      DATABASE_URL: postgres://postgres:password@db:5432/tba_development
+      DATABASE_URL: postgres://postgres:password@db:5432/top_brand_development
       REDIS_URL: redis://redis:6379/0
       RAILS_ENV: development
     volumes:
@@ -41,7 +41,7 @@ services:
       - redis
       - db
     environment:
-      DATABASE_URL: postgres://postgres:password@db:5432/tba_development
+      DATABASE_URL: postgres://postgres:password@db:5432/top_brand_development
       REDIS_URL: redis://redis:6379/0
       RAILS_ENV: development
     volumes:
