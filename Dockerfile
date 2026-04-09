@@ -21,7 +21,8 @@ RUN apt-get update -qq && \
 
 # Set production environment
 ENV RAILS_ENV="development" \
-    BUNDLE_PATH="/usr/local/bundle"
+    BUNDLE_PATH="/usr/local/bundle" \
+    PATH="/rails/bin:$PATH"
     # BUNDLE_DEPLOYMENT="1" \
     # BUNDLE_WITHOUT="development"
 
