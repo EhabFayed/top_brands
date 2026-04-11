@@ -7,6 +7,7 @@ class CreateProducts < ActiveRecord::Migration[8.0]
       t.text   :description_en
       t.string :alt_text_ar
       t.string :alt_text_en
+      t.boolean :is_international, default: false
       t.integer :display_order, default: 0
       t.string :size
       t.timestamps

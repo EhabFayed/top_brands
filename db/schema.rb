@@ -132,6 +132,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_09_011402) do
     t.text "description_en"
     t.string "alt_text_ar"
     t.string "alt_text_en"
+    t.boolean "is_international", default: false
     t.integer "display_order", default: 0
     t.string "size"
     t.datetime "created_at", null: false
