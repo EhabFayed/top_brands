@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_04_09_011402) do
+ActiveRecord::Schema[8.0].define(version: 2026_04_12_160000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -98,6 +98,29 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_09_011402) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "content_photos", force: :cascade do |t|
+    t.bigint "content_id", null: false
+    t.string "alt_ar"
+    t.string "alt_en"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_id"], name: "index_content_photos_on_content_id"
+  end
+
+  create_table "contents", force: :cascade do |t|
+    t.string "key", null: false
+    t.text "value"
+    t.string "content_type"
+    t.integer "position", default: 0, null: false
+    t.string "parentable_type"
+    t.bigint "parentable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parentable_type", "parentable_id"], name: "index_contents_on_parentable"
+    t.index ["parentable_type", "parentable_id"], name: "index_contents_on_parentable_type_and_parentable_id"
+    t.index ["position"], name: "index_contents_on_position"
+  end
+
   create_table "faqs", force: :cascade do |t|
     t.string "question_ar"
     t.string "question_en"
@@ -137,6 +160,21 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_09_011402) do
     t.string "size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "brand_id"
+    t.index ["brand_id"], name: "index_products_on_brand_id"
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.string "page", null: false
+    t.string "section_type", null: false
+    t.integer "position", default: 0, null: false
+    t.jsonb "settings", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["page", "section_type"], name: "index_sections_on_page_and_section_type"
+    t.index ["page"], name: "index_sections_on_page"
+    t.index ["section_type"], name: "index_sections_on_section_type"
+    t.index ["settings"], name: "index_sections_on_settings", using: :gin
   end
 
   create_table "users", force: :cascade do |t|
@@ -153,4 +191,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_09_011402) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "blog_photos", "blogs"
+  add_foreign_key "content_photos", "contents"
+  add_foreign_key "products", "brands"
 end

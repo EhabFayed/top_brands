@@ -1,0 +1,563 @@
+{
+  "info": {
+    "name": "Top Brand API - Full Fast-Import",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Authentication",
+      "item": [
+        {
+          "name": "Signup",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "user[name]", "value": "Admin", "type": "text" },
+                { "key": "user[email]", "value": "admin@topbrand.com", "type": "text" },
+                { "key": "user[password]", "value": "password123", "type": "text" },
+                { "key": "user[password_confirmation]", "value": "password123", "type": "text" },
+                { "key": "user[image]", "type": "file", "src": "" }
+              ]
+            },
+            "url": "http://localhost:3000/api/signup"
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@topbrand.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": "http://localhost:3000/api/login"
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Blogs",
+      "item": [
+        {
+          "name": "List Blogs",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/blogs"
+          }
+        },
+        {
+          "name": "Show Blog",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/blogs/1"
+          }
+        },
+        {
+          "name": "Create Blog",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "blog[title_en]", "value": "My Tech Blog", "type": "text" },
+                { "key": "blog[title_ar]", "value": "بلج التقنية", "type": "text" },
+                { "key": "blog[slug]", "value": "my-tech-blog", "type": "text" },
+                { "key": "blog[category]", "value": "digital_marketing", "type": "text" },
+                { "key": "blog[blog_photos_attributes][0][photo]", "type": "file", "src": "" },
+                { "key": "blog[blog_photos_attributes][0][alt_en]", "value": "Hero Cover", "type": "text" },
+                { "key": "blog[contents_attributes][0][key]", "value": "intro", "type": "text" },
+                { "key": "blog[contents_attributes][0][value]", "value": "Welcome to the blog!", "type": "text" },
+                { "key": "blog[contents_attributes][0][content_photos_attributes][0][photo]", "type": "file", "src": "" }
+              ]
+            },
+            "url": "http://localhost:3000/api/blogs"
+          }
+        },
+        {
+          "name": "Update Blog",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "blog[title_en]", "value": "Updated Blog Title", "type": "text" },
+                { "key": "blog[contents_attributes][0][id]", "value": "1", "type": "text" },
+                { "key": "blog[contents_attributes][0][value]", "value": "Updated content string!", "type": "text" }
+              ]
+            },
+            "url": "http://localhost:3000/api/blogs/1"
+          }
+        },
+        {
+          "name": "Delete Blog",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/blogs/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Sections",
+      "item": [
+        {
+          "name": "List Sections",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/sections?page=home"
+          }
+        },
+        {
+          "name": "Show Section",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/sections/1"
+          }
+        },
+        {
+          "name": "Create Section",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "section[page]", "value": "home", "type": "text" },
+                { "key": "section[section_type]", "value": "hero", "type": "text" },
+                { "key": "section[position]", "value": "1", "type": "text" },
+                { "key": "section[contents_attributes][0][key]", "value": "hero_title", "type": "text" },
+                { "key": "section[contents_attributes][0][value]", "value": "We Build Epic Stuff", "type": "text" },
+                { "key": "section[contents_attributes][0][content_photos_attributes][0][photo]", "type": "file", "src": "" }
+              ]
+            },
+            "url": "http://localhost:3000/api/sections"
+          }
+        },
+        {
+          "name": "Update Section",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "section[position]", "value": "2", "type": "text" }
+              ]
+            },
+            "url": "http://localhost:3000/api/sections/1"
+          }
+        },
+        {
+          "name": "Delete Section",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/sections/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Brands",
+      "item": [
+        {
+          "name": "List Brands",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/brands"
+          }
+        },
+        {
+          "name": "Show Brand",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/brands/1"
+          }
+        },
+        {
+          "name": "Create Brand",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "brand[title_en]", "value": "Apple", "type": "text" },
+                { "key": "brand[title_ar]", "value": "أبل", "type": "text" },
+                { "key": "brand[image]", "type": "file", "src": "" }
+              ]
+            },
+            "url": "http://localhost:3000/api/brands"
+          }
+        },
+        {
+          "name": "Update Brand",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "brand[title_en]", "value": "Apple Inc.", "type": "text" }
+              ]
+            },
+            "url": "http://localhost:3000/api/brands/1"
+          }
+        },
+        {
+          "name": "Delete Brand",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/brands/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Products",
+      "item": [
+        {
+          "name": "List Products",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/products"
+          }
+        },
+        {
+          "name": "Show Product",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/products/1"
+          }
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "product[title_en]", "value": "iPhone", "type": "text" },
+                { "key": "product[title_ar]", "value": "أيفون", "type": "text" },
+                { "key": "product[brand_id]", "value": "1", "type": "text" }
+              ]
+            },
+            "url": "http://localhost:3000/api/products"
+          }
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "product[title_en]", "value": "iPhone 15", "type": "text" }
+              ]
+            },
+            "url": "http://localhost:3000/api/products/1"
+          }
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/products/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Leaderships",
+      "item": [
+        {
+          "name": "List Leaderships",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/leaderships"
+          }
+        },
+        {
+          "name": "Show Leadership",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/leaderships/1"
+          }
+        },
+        {
+          "name": "Create Leadership",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "leadership[name_en]", "value": "John Doe", "type": "text" },
+                { "key": "leadership[name_ar]", "value": "جون", "type": "text" },
+                { "key": "leadership[position_en]", "value": "CEO", "type": "text" },
+                { "key": "leadership[image]", "type": "file", "src": "" }
+              ]
+            },
+            "url": "http://localhost:3000/api/leaderships"
+          }
+        },
+        {
+          "name": "Update Leadership",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "leadership[position_en]", "value": "Founder & CEO", "type": "text" }
+              ]
+            },
+            "url": "http://localhost:3000/api/leaderships/1"
+          }
+        },
+        {
+          "name": "Delete Leadership",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/leaderships/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "7. Faqs",
+      "item": [
+        {
+          "name": "List Faqs",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/faqs"
+          }
+        },
+        {
+          "name": "Show Faq",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/faqs/1"
+          }
+        },
+        {
+          "name": "Create Faq",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"faq\": {\n    \"question_en\": \"How does this work?\",\n    \"answer_en\": \"Like magic.\"\n  }\n}"
+            },
+            "url": "http://localhost:3000/api/faqs"
+          }
+        },
+        {
+          "name": "Update Faq",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"faq\": {\n    \"answer_en\": \"More magic.\"\n  }\n}"
+            },
+            "url": "http://localhost:3000/api/faqs/1"
+          }
+        },
+        {
+          "name": "Delete Faq",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/faqs/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "8. Users",
+      "item": [
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/users"
+          }
+        },
+        {
+          "name": "Show User",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/users/1"
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "user[name]", "value": "Updated Name", "type": "text" },
+                { "key": "user[image]", "type": "file", "src": "" }
+              ]
+            },
+            "url": "http://localhost:3000/api/users/1"
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/users/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "9. Company Data (Singleton)",
+      "item": [
+        {
+          "name": "Show Company Data",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/company_data"
+          }
+        },
+        {
+          "name": "Update Company Data",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_datum\": {\n    \"email\": \"support@topbrand.com\"\n  }\n}"
+            },
+            "url": "http://localhost:3000/api/company_data"
+          }
+        }
+      ]
+    },
+    {
+      "name": "10. Enums",
+      "item": [
+        {
+          "name": "List Enums",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "http://localhost:3000/api/enums"
+          }
+        }
+      ]
+    }
+  ]
+}
