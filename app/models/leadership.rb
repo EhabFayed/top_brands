@@ -7,7 +7,7 @@ class Leadership < ApplicationRecord
     return nil unless image.attached?
 
     Rails.cache.fetch("leadership_image_url_#{id}", expires_in: 12.hours) do
-      Rails.application.routes.url_helpers.url_for(image)
+      Rails.application.routes.url_helpers.rails_blob_path(image, only_path: true)
     end
   end
 

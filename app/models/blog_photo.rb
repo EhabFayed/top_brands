@@ -8,7 +8,7 @@ class BlogPhoto < ApplicationRecord
     return nil unless photo.attached?
 
     Rails.cache.fetch("plog_photo_url_#{id}", expires_in: 12.hours) do
-      Rails.application.routes.url_helpers.url_for(photo)
+      Rails.application.routes.url_helpers.rails_blob_path(photo, only_path: true)
     end
   end
 
