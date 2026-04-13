@@ -70,17 +70,7 @@ class Section < ApplicationRecord
     why_choose_growing_together: "49",
     our_customers: "50",
     your_trusted_distribution_partner: "51",
-    looking_for_reliable_fmcg_distribution: "52",
-
-
-
-
-
-
-
-
-
-    cta:  "1"
+    looking_for_reliable_fmcg_distribution: "52"
   }.freeze
 
   enumerize :page,         in: PAGES,         predicates: true
