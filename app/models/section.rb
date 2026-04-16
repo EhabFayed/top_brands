@@ -81,4 +81,5 @@ class Section < ApplicationRecord
 
   validates :page,         presence: true
   validates :section_type, presence: true
+  validates :section_type, uniqueness: { scope: :page }
 end
