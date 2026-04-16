@@ -27,7 +27,6 @@ services:
     build: .
     image: myapp_image:latest
     restart: always
-    user: "${UID}:${GID}"
     depends_on:
       db:
         condition: service_healthy
