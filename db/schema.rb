@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_04_12_160000) do
+ActiveRecord::Schema[8.0].define(version: 2026_04_18_001612) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -40,6 +40,24 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_12_160000) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "blog_con_photos", force: :cascade do |t|
+    t.bigint "blog_content_id", null: false
+    t.string "alt_ar"
+    t.string "alt_en"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blog_content_id"], name: "index_blog_con_photos_on_blog_content_id"
+  end
+
+  create_table "blog_contents", force: :cascade do |t|
+    t.bigint "blog_id", null: false
+    t.text "content_ar"
+    t.text "content_en"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blog_id"], name: "index_blog_contents_on_blog_id"
   end
 
   create_table "blog_photos", force: :cascade do |t|
@@ -78,6 +96,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_12_160000) do
     t.string "alt_text_en"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_international", default: false
   end
 
   create_table "company_data", force: :cascade do |t|
@@ -148,6 +167,15 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_12_160000) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_photos", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.string "alt_ar"
+    t.string "alt_en"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_photos_on_product_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "title_ar", null: false
     t.string "title_en", null: false
@@ -155,7 +183,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_12_160000) do
     t.text "description_en"
     t.string "alt_text_ar"
     t.string "alt_text_en"
-    t.boolean "is_international", default: false
     t.integer "display_order", default: 0
     t.string "size"
     t.datetime "created_at", null: false
@@ -190,7 +217,10 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_12_160000) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "blog_con_photos", "blog_contents"
+  add_foreign_key "blog_contents", "blogs"
   add_foreign_key "blog_photos", "blogs"
   add_foreign_key "content_photos", "contents"
+  add_foreign_key "product_photos", "products"
   add_foreign_key "products", "brands"
 end

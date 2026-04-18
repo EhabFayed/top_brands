@@ -4,18 +4,18 @@ module Api
 
     def index
       @products = Product.order(:display_order)
-      render json: @products, include: [:faqs]
+      render json: @products.map { |p| product_json(p) }
     end
 
     def show
-      render json: @product, include: [:faqs]
+      render json: product_json(@product)
     end
 
     def create
       @product = Product.new(product_params)
 
       if @product.save
-        render json: @product, status: :created
+        render json: product_json(@product), status: :created
       else
         render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
       end
@@ -23,7 +23,7 @@ module Api
 
     def update
       if @product.update(product_params)
-        render json: @product
+        render json: product_json(@product)
       else
         render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
       end
@@ -36,6 +36,12 @@ module Api
 
     private
 
+    def product_json(product)
+      product.as_json(include: :faqs).merge(
+        image_url: product.image.attached? ? product.cached_image_url : nil
+      )
+    end
+
     def set_product
       @product = Product.find(params[:id])
     end
@@ -43,7 +49,7 @@ module Api
     def product_params
       params.require(:product).permit(
         :title_ar, :title_en, :description_ar, :description_en,
-        :alt_text_ar, :alt_text_en, :is_international, :display_order, :size, :brand_id
+        :alt_text_ar, :alt_text_en, :display_order, :size, :brand_id, :image
       )
     end
   end

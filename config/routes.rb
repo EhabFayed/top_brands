@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :blogs do
       resources :blog_photos, only: [:create, :destroy] # Optional nested
     end
+    resources :blog_contents
     resources :brands
     resource :company_data, only: [:show, :update] # Singleton resource
     resources :faqs
