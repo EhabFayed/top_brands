@@ -17,7 +17,6 @@ Rails.application.routes.draw do
     resources :brands
     resource :company_data, only: [:show, :update] # Singleton resource
     resources :faqs
-    resources :leaderships
     resources :products
   end
 end
