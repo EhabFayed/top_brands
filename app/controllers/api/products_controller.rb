@@ -15,7 +15,7 @@ module Api
       @product = Product.new(product_params)
 
       if @product.save
-        render json: product_json(@product), status: :created
+        render json: {message: "Product created successfully"}, status: :created
       else
         render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
       end
@@ -23,7 +23,7 @@ module Api
 
     def update
       if @product.update(product_params)
-        render json: product_json(@product)
+        render json: {message: "Product updated successfully"}, status: :ok
       else
         render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
       end

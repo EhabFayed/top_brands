@@ -17,11 +17,18 @@ module Api
     end
 
     # POST /api/sections
+    # A section_type on a given page is unique — find the existing one or create it.
     def create
-      section = Section.new(section_params)
+      section = Section.find_or_initialize_by(
+        page: section_params[:page],
+        section_type: section_params[:section_type]
+      )
+      section.assign_attributes(section_params)
+
+      status = section.new_record? ? :created : :ok
 
       if section.save
-        render json: serialize_section(section), status: :created
+        render json: serialize_section(section), status: status
       else
         render json: { errors: section.errors.full_messages }, status: :unprocessable_entity
       end
@@ -52,8 +59,7 @@ module Api
       params.require(:section).permit(
         :page, :section_type, :position, :image, settings: {},
         contents_attributes: [
-          :id, :key, :value, :content_type, :position, :_destroy,
-          content_photos_attributes: [:id, :photo, :alt_ar, :alt_en, :_destroy]
+          :id, :key, :value_ar, :value_en, :content_type, :position, :_destroy,
         ]
       )
     end
@@ -81,10 +87,10 @@ module Api
         {
           id:           c.id,
           key:          c.key,
-          value:        c.value,
+          value_ar:        c.value_ar,
+          value_en:        c.value_en,
           content_type: c.content_type,
           position:     c.position,
-          photos:       c.content_photos.map { |cp| { id: cp.id, alt_ar: cp.alt_ar, alt_en: cp.alt_en, photo_url: cp.cached_photo_url } }
         }
       end
     end

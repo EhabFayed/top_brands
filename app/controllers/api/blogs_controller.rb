@@ -15,7 +15,7 @@ module Api
       @blog = Blog.new(blog_params)
 
       if @blog.save
-        render json: serialize_blog(@blog), status: :created
+        render json: { message: "Blog created successfully" }, status: :created
       else
         render json: { errors: @blog.errors.full_messages }, status: :unprocessable_entity
       end
@@ -23,7 +23,7 @@ module Api
 
     def update
       if @blog.update(blog_params)
-        render json: serialize_blog(@blog)
+        render json: { message: "Blog updated successfully" }, status: :ok
       else
         render json: { errors: @blog.errors.full_messages }, status: :unprocessable_entity
       end
@@ -45,7 +45,7 @@ module Api
         :title_ar, :title_en, :description_ar, :description_en,
         :meta_title_ar, :meta_title_en, :slug, :slug_ar,
         :meta_description_ar, :meta_description_en, :is_published, :category,
-        blog_photos_attributes: [:id, :photo, :alt_ar, :alt_en, :is_arabic, :_destroy],
+        :photo, :alt_ar, :alt_en,
         contents_attributes: [
           :id, :key, :value, :content_type, :position, :_destroy,
           content_photos_attributes: [:id, :photo, :alt_ar, :alt_en, :_destroy]
@@ -62,6 +62,8 @@ module Api
         id: blog.id,
         title_ar: blog.title_ar,
         title_en: blog.title_en,
+        alt_ar: blog.alt_ar,
+        alt_en: blog.alt_en,
         slug: blog.slug,
         slug_ar: blog.slug_ar,
         description_ar: blog.description_ar,
@@ -72,7 +74,8 @@ module Api
         meta_description_en: blog.meta_description_en,
         is_published: blog.is_published,
         category: blog.category,
-        photos: blog.blog_photos.map { |p| { id: p.id, alt_ar: p.alt_ar, alt_en: p.alt_en, photo_url: p.cached_photo_url } },
+        photo: blog.cached_image_url,
+        # photos: blog.blog_photos.map { |p| { id: p.id, alt_ar: p.alt_ar, alt_en: p.alt_en, photo_url: p.cached_photo_url } },
         contents: blog.blog_contents.map { |c| { id: c.id, content_ar: c.content_ar, content_en: c.content_en, photos: c.blog_con_photos.map {|cp| {url: cp.cached_photo_url, alt_ar: cp.alt_ar, alt_en: cp.alt_en} } } }
       }
     end

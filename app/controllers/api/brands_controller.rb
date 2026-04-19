@@ -15,7 +15,7 @@ module Api
       @brand = Brand.new(brand_params)
 
       if @brand.save
-        render json: serialize_brand(@brand), status: :created
+        render json: {message: "Brand created successfully"}, status: :created
       else
         render json: { errors: @brand.errors.full_messages }, status: :unprocessable_entity
       end
@@ -23,7 +23,7 @@ module Api
 
     def update
       if @brand.update(brand_params)
-        render json: serialize_brand(@brand)
+        render json: {message: "Brand updated successfully"}, status: :ok
       else
         render json: { errors: @brand.errors.full_messages }, status: :unprocessable_entity
       end
@@ -56,7 +56,6 @@ module Api
         alt_text_ar: brand.alt_text_ar,
         alt_text_en: brand.alt_text_en,
         image_url: brand.cached_image_url,
-        is_international: brand.is_international,
         products: brand.try(:products).map { |p| { id: p.id, title_ar: p.title_ar, title_en: p.title_en } }
       }
     end

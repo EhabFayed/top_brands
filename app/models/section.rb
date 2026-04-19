@@ -77,6 +77,7 @@ class Section < ApplicationRecord
   enumerize :section_type, in: SECTION_TYPES, predicates: true
 
   has_many :contents, -> { order(:position) }, as: :parentable, dependent: :destroy
+  accepts_nested_attributes_for :contents, allow_destroy: true, reject_if: :all_blank
   has_one_attached :image
 
   validates :page,         presence: true
