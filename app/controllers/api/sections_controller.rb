@@ -5,7 +5,6 @@ module Api
     # GET /api/sections?page=home
     def index
       sections = Section.all
-      puts("paraaaaaaams#{params}")
       sections = sections.where(page: params[:page]) if params[:page].present?
       sections = sections.order(:position).includes(:contents)
 
@@ -51,7 +50,7 @@ module Api
 
     def section_params
       params.require(:section).permit(
-        :page, :section_type, :position, settings: {},
+        :page, :section_type, :position, :image, settings: {},
         contents_attributes: [
           :id, :key, :value, :content_type, :position, :_destroy,
           content_photos_attributes: [:id, :photo, :alt_ar, :alt_en, :_destroy]
@@ -70,6 +69,7 @@ module Api
         section_type: section.section_type.to_s,
         position:     section.position,
         settings:     section.settings,
+        image_url:    section.image.attached? ? section.cached_image_url : nil,
         contents:     serialize_contents(section.contents),
         created_at:   section.created_at,
         updated_at:   section.updated_at

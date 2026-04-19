@@ -54,7 +54,7 @@ module Api
     end
 
     def serialize_blogs(blogs)
-      blogs.includes(:blog_photos, :contents, :faqs).map { |b| serialize_blog(b) }
+      blogs.includes(:blog_photos, :blog_contents, :faqs).map { |b| serialize_blog(b) }
     end
 
     def serialize_blog(blog)
@@ -73,7 +73,7 @@ module Api
         is_published: blog.is_published,
         category: blog.category,
         photos: blog.blog_photos.map { |p| { id: p.id, alt_ar: p.alt_ar, alt_en: p.alt_en, photo_url: p.cached_photo_url } },
-        contents: blog.contents.map { |c| { id: c.id, key: c.key, value: c.value, photos: c.content_photos.map {|cp| {url: cp.cached_photo_url, alt_ar: cp.alt_ar, alt_en: cp.alt_en} } } }
+        contents: blog.blog_contents.map { |c| { id: c.id, content_ar: c.content_ar, content_en: c.content_en, photos: c.blog_con_photos.map {|cp| {url: cp.cached_photo_url, alt_ar: cp.alt_ar, alt_en: cp.alt_en} } } }
       }
     end
   end

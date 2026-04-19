@@ -1,13 +1,15 @@
-class BlogPhoto < ApplicationRecord
-  belongs_to :blog
+class BlogConPhoto < ApplicationRecord
+  belongs_to :blog_content
+
   has_one_attached :photo
+
+  validates :alt_ar, :alt_en, presence: true
   after_commit :clear_photo_cache, on: %i[update destroy]
 
-  # validates :alt_ar, :alt_en, presence: true
   def cached_photo_url
     return nil unless photo.attached?
 
-    Rails.cache.fetch("plog_photo_url_#{id}", expires_in: 12.hours) do
+    Rails.cache.fetch("blog_con_photo_url_#{id}", expires_in: 12.hours) do
       Rails.application.routes.url_helpers.rails_blob_url(photo)
     end
   end
@@ -15,6 +17,6 @@ class BlogPhoto < ApplicationRecord
   private
 
   def clear_photo_cache
-    Rails.cache.delete("plog_photo_url_#{id}")
+    Rails.cache.delete("blog_con_photo_url_#{id}")
   end
 end

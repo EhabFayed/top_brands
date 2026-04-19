@@ -77,9 +77,25 @@ class Section < ApplicationRecord
   enumerize :section_type, in: SECTION_TYPES, predicates: true
 
   has_many :contents, -> { order(:position) }, as: :parentable, dependent: :destroy
-  accepts_nested_attributes_for :contents, allow_destroy: true
+  has_one_attached :image
 
   validates :page,         presence: true
   validates :section_type, presence: true
   validates :section_type, uniqueness: { scope: :page }
+
+  after_commit :clear_section_cache, on: %i[update destroy]
+
+  def cached_image_url
+    return nil unless image.attached?
+
+    Rails.cache.fetch("section_image_url_#{id}", expires_in: 12.hours) do
+      Rails.application.routes.url_helpers.rails_blob_url(image)
+    end
+  end
+
+  private
+
+  def clear_section_cache
+    Rails.cache.delete("section_image_url_#{id}")
+  end
 end

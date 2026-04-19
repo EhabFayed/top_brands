@@ -24,10 +24,9 @@ class Blog < ApplicationRecord
   scope :published, -> { where(is_published: true) }
 
   has_many :faqs, as: :parentable, dependent: :destroy
-  has_many :contents, as: :parentable, dependent: :destroy
+  has_many :blog_contents, dependent: :destroy
   has_many :blog_photos, dependent: :destroy
   accepts_nested_attributes_for :blog_photos, allow_destroy: true, reject_if: :all_blank
-  accepts_nested_attributes_for :contents, allow_destroy: true
 
 
 
