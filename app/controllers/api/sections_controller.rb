@@ -69,16 +69,19 @@ module Api
     end
 
     def serialize_section(section)
+      section_type = section.section_type.to_s
       {
-        id:           section.id,
-        page:         section.page.to_s,
-        section_type: section.section_type.to_s,
-        position:     section.position,
-        settings:     section.settings,
-        image_url:    section.image.attached? ? section.cached_image_url : nil,
-        contents:     serialize_contents(section.contents),
-        created_at:   section.created_at,
-        updated_at:   section.updated_at
+        section_type => {
+          id:           section.id,
+          page:         section.page.to_s,
+          section_type: section_type,
+          position:     section.position,
+          settings:     section.settings,
+          image_url:    section.image.attached? ? section.cached_image_url : nil,
+          contents:     serialize_contents(section.contents),
+          created_at:   section.created_at,
+          updated_at:   section.updated_at
+        }
       }
     end
 
