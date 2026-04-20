@@ -11,50 +11,21 @@
           "name": "Signup",
           "request": {
             "method": "POST",
-            "header": [
-
-            ],
+            "header": [],
             "body": {
               "mode": "formdata",
               "formdata": [
-                {
-                  "key": "user[name]",
-                  "value": "Admin",
-                  "type": "text"
-                },
-                {
-                  "key": "user[email]",
-                  "value": "admin@topbrand.com",
-                  "type": "text"
-                },
-                {
-                  "key": "user[password]",
-                  "value": "password123",
-                  "type": "text"
-                },
-                {
-                  "key": "user[password_confirmation]",
-                  "value": "password123",
-                  "type": "text"
-                },
-                {
-                  "key": "user[image]",
-                  "value": "",
-                  "type": "file"
-                }
+                { "key": "user[name]", "value": "Admin", "type": "text" },
+                { "key": "user[email]", "value": "admin@topbrand.com", "type": "text" },
+                { "key": "user[password]", "value": "password123", "type": "text" },
+                { "key": "user[password_confirmation]", "value": "password123", "type": "text" },
+                { "key": "user[image]", "value": "", "type": "file" }
               ]
             },
             "url": {
               "raw": "http://localhost:3000/api/signup",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "signup"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "signup"]
             }
           }
         },
@@ -62,56 +33,32 @@
           "name": "Login",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"email\": \"admin@topbrand.com\",\n  \"password\": \"password123\"\n}"
             },
             "url": {
               "raw": "http://localhost:3000/api/login",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "login"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "login"]
             }
           }
         }
       ]
     },
     {
-      "name": "2. Blogs",
+      "name": "2. Blogs (Admin)",
       "item": [
         {
-          "name": "List Blog",
+          "name": "List Blogs",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/blogs",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "blogs"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "blogs"]
             }
           }
         },
@@ -119,24 +66,11 @@
           "name": "Show Blog",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/blogs/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "blogs",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "blogs", "1"]
             }
           }
         },
@@ -144,73 +78,22 @@
           "name": "Create Blog",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "body": {
               "mode": "formdata",
               "formdata": [
-                {
-                  "key": "blog[title_en]",
-                  "value": "My Tech Blog",
-                  "type": "text"
-                },
-                {
-                  "key": "blog[title_ar]",
-                  "value": "بلج التقنية",
-                  "type": "text"
-                },
-                {
-                  "key": "blog[slug]",
-                  "value": "my-tech-blog",
-                  "type": "text"
-                },
-                {
-                  "key": "blog[category]",
-                  "value": "digital_marketing",
-                  "type": "text"
-                },
-                {
-                  "key": "blog[blog_photos_attributes][0][photo]",
-                  "value": "",
-                  "type": "file"
-                },
-                {
-                  "key": "blog[blog_photos_attributes][0][alt_en]",
-                  "value": "Hero Cover",
-                  "type": "text"
-                },
-                {
-                  "key": "blog[contents_attributes][0][key]",
-                  "value": "intro",
-                  "type": "text"
-                },
-                {
-                  "key": "blog[contents_attributes][0][value]",
-                  "value": "Welcome to the blog!",
-                  "type": "text"
-                },
-                {
-                  "key": "blog[contents_attributes][0][content_photos_attributes][0][photo]",
-                  "value": "",
-                  "type": "file"
-                }
+                { "key": "blog[title_en]", "value": "My Tech Blog", "type": "text" },
+                { "key": "blog[title_ar]", "value": "بلج التقنية", "type": "text" },
+                { "key": "blog[slug]", "value": "my-tech-blog", "type": "text" },
+                { "key": "blog[category]", "value": "digital_marketing", "type": "text" },
+                { "key": "blog[is_published]", "value": "false", "type": "text" },
+                { "key": "blog[image]", "value": "", "type": "file" }
               ]
             },
             "url": {
               "raw": "http://localhost:3000/api/blogs",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "blogs"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "blogs"]
             }
           }
         },
@@ -218,44 +101,18 @@
           "name": "Update Blog",
           "request": {
             "method": "PATCH",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "body": {
               "mode": "formdata",
               "formdata": [
-                {
-                  "key": "blog[title_en]",
-                  "value": "Updated Blog Title",
-                  "type": "text"
-                },
-                {
-                  "key": "blog[contents_attributes][0][id]",
-                  "value": "1",
-                  "type": "text"
-                },
-                {
-                  "key": "blog[contents_attributes][0][value]",
-                  "value": "Updated content string!",
-                  "type": "text"
-                }
+                { "key": "blog[title_en]", "value": "Updated Blog Title", "type": "text" },
+                { "key": "blog[is_published]", "value": "true", "type": "text" }
               ]
             },
             "url": {
               "raw": "http://localhost:3000/api/blogs/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "blogs",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "blogs", "1"]
             }
           }
         },
@@ -263,53 +120,28 @@
           "name": "Delete Blog",
           "request": {
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/blogs/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "blogs",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "blogs", "1"]
             }
           }
         }
       ]
     },
     {
-      "name": "2.5 Blog Contents",
+      "name": "2.5 Blog Contents (Admin)",
       "item": [
         {
           "name": "List Blog Content",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/blog_contents",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "blog_contents"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "blog_contents"]
             }
           }
         },
@@ -317,24 +149,11 @@
           "name": "Show Blog Content",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/blog_contents/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "blog_contents",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "blog_contents", "1"]
             }
           }
         },
@@ -342,53 +161,21 @@
           "name": "Create Blog Content",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "body": {
               "mode": "formdata",
               "formdata": [
-                {
-                  "key": "blog_content[blog_id]",
-                  "value": "1",
-                  "type": "text"
-                },
-                {
-                  "key": "blog_content[content_en]",
-                  "value": "English Content",
-                  "type": "text"
-                },
-                {
-                  "key": "blog_content[content_ar]",
-                  "value": "محتوى عربي",
-                  "type": "text"
-                },
-                {
-                  "key": "blog_content[blog_con_photos_attributes][0][photo]",
-                  "value": "",
-                  "type": "file"
-                },
-                {
-                  "key": "blog_content[blog_con_photos_attributes][0][alt_en]",
-                  "value": "Sample Image",
-                  "type": "text"
-                }
+                { "key": "blog_content[blog_id]", "value": "1", "type": "text" },
+                { "key": "blog_content[content_en]", "value": "English Content", "type": "text" },
+                { "key": "blog_content[content_ar]", "value": "محتوى عربي", "type": "text" },
+                { "key": "blog_content[blog_con_photos_attributes][0][photo]", "value": "", "type": "file" },
+                { "key": "blog_content[blog_con_photos_attributes][0][alt_en]", "value": "Sample Image", "type": "text" }
               ]
             },
             "url": {
               "raw": "http://localhost:3000/api/blog_contents",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "blog_contents"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "blog_contents"]
             }
           }
         },
@@ -396,34 +183,17 @@
           "name": "Update Blog Content",
           "request": {
             "method": "PATCH",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "body": {
               "mode": "formdata",
               "formdata": [
-                {
-                  "key": "blog_content[content_en]",
-                  "value": "Updated English Content",
-                  "type": "text"
-                }
+                { "key": "blog_content[content_en]", "value": "Updated English Content", "type": "text" }
               ]
             },
             "url": {
               "raw": "http://localhost:3000/api/blog_contents/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "blog_contents",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "blog_contents", "1"]
             }
           }
         },
@@ -431,53 +201,28 @@
           "name": "Delete Blog Content",
           "request": {
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/blog_contents/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "blog_contents",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "blog_contents", "1"]
             }
           }
         }
       ]
     },
     {
-      "name": "3. Sections",
+      "name": "3. Sections (Admin)",
       "item": [
         {
-          "name": "List Section",
+          "name": "List Sections",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/sections",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "sections"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "sections"]
             }
           }
         },
@@ -485,24 +230,11 @@
           "name": "Show Section",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/sections/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "sections",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "sections", "1"]
             }
           }
         },
@@ -510,63 +242,24 @@
           "name": "Create Section",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "body": {
               "mode": "formdata",
               "formdata": [
-                {
-                  "key": "section[page]",
-                  "value": "home",
-                  "type": "text"
-                },
-                {
-                  "key": "section[section_type]",
-                  "value": "hero",
-                  "type": "text"
-                },
-                {
-                  "key": "section[position]",
-                  "value": "1",
-                  "type": "text"
-                },
-                {
-                  "key": "section[image]",
-                  "value": "",
-                  "type": "file"
-                },
-                {
-                  "key": "section[contents_attributes][0][key]",
-                  "value": "hero_title",
-                  "type": "text"
-                },
-                {
-                  "key": "section[contents_attributes][0][value]",
-                  "value": "We Build Epic Stuff",
-                  "type": "text"
-                },
-                {
-                  "key": "section[contents_attributes][0][content_photos_attributes][0][photo]",
-                  "value": "",
-                  "type": "file"
-                }
+                { "key": "section[page]", "value": "home", "type": "text" },
+                { "key": "section[section_type]", "value": "hero", "type": "text" },
+                { "key": "section[position]", "value": "1", "type": "text" },
+                { "key": "section[image]", "value": "", "type": "file" },
+                { "key": "section[contents_attributes][0][key]", "value": "hero_title", "type": "text" },
+                { "key": "section[contents_attributes][0][value_en]", "value": "We Build Epic Stuff", "type": "text" },
+                { "key": "section[contents_attributes][0][value_ar]", "value": "نبني أشياء رائعة", "type": "text" },
+                { "key": "section[contents_attributes][0][content_photos_attributes][0][photo]", "value": "", "type": "file" }
               ]
             },
             "url": {
               "raw": "http://localhost:3000/api/sections",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "sections"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "sections"]
             }
           }
         },
@@ -574,34 +267,17 @@
           "name": "Update Section",
           "request": {
             "method": "PATCH",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "body": {
               "mode": "formdata",
               "formdata": [
-                {
-                  "key": "section[position]",
-                  "value": "2",
-                  "type": "text"
-                }
+                { "key": "section[position]", "value": "2", "type": "text" }
               ]
             },
             "url": {
               "raw": "http://localhost:3000/api/sections/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "sections",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "sections", "1"]
             }
           }
         },
@@ -609,53 +285,28 @@
           "name": "Delete Section",
           "request": {
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/sections/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "sections",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "sections", "1"]
             }
           }
         }
       ]
     },
     {
-      "name": "4. Brands",
+      "name": "4. Brands (Admin)",
       "item": [
         {
-          "name": "List Brand",
+          "name": "List Brands",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/brands",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "brands"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "brands"]
             }
           }
         },
@@ -663,24 +314,11 @@
           "name": "Show Brand",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/brands/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "brands",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "brands", "1"]
             }
           }
         },
@@ -688,43 +326,22 @@
           "name": "Create Brand",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "body": {
               "mode": "formdata",
               "formdata": [
-                {
-                  "key": "brand[title_en]",
-                  "value": "Apple",
-                  "type": "text"
-                },
-                {
-                  "key": "brand[title_ar]",
-                  "value": "أبل",
-                  "type": "text"
-                },
-                {
-                  "key": "brand[image]",
-                  "value": "",
-                  "type": "file"
-                }
+                { "key": "brand[title_en]", "value": "Apple", "type": "text" },
+                { "key": "brand[title_ar]", "value": "أبل", "type": "text" },
+                { "key": "brand[alt_text_en]", "value": "Apple Logo", "type": "text" },
+                { "key": "brand[alt_text_ar]", "value": "شعار أبل", "type": "text" },
+                { "key": "brand[is_published]", "value": "false", "type": "text" },
+                { "key": "brand[image]", "value": "", "type": "file" }
               ]
             },
             "url": {
               "raw": "http://localhost:3000/api/brands",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "brands"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "brands"]
             }
           }
         },
@@ -732,34 +349,18 @@
           "name": "Update Brand",
           "request": {
             "method": "PATCH",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "body": {
               "mode": "formdata",
               "formdata": [
-                {
-                  "key": "brand[title_en]",
-                  "value": "Apple Inc.",
-                  "type": "text"
-                }
+                { "key": "brand[title_en]", "value": "Apple Inc.", "type": "text" },
+                { "key": "brand[is_published]", "value": "true", "type": "text" }
               ]
             },
             "url": {
               "raw": "http://localhost:3000/api/brands/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "brands",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "brands", "1"]
             }
           }
         },
@@ -767,53 +368,28 @@
           "name": "Delete Brand",
           "request": {
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/brands/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "brands",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "brands", "1"]
             }
           }
         }
       ]
     },
     {
-      "name": "5. Products",
+      "name": "5. Products (Admin)",
       "item": [
         {
-          "name": "List Product",
+          "name": "List Products",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/products",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "products"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "products"]
             }
           }
         },
@@ -821,24 +397,11 @@
           "name": "Show Product",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/products/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "products",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "products", "1"]
             }
           }
         },
@@ -846,48 +409,23 @@
           "name": "Create Product",
           "request": {
             "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "body": {
               "mode": "formdata",
               "formdata": [
-                {
-                  "key": "product[title_en]",
-                  "value": "iPhone",
-                  "type": "text"
-                },
-                {
-                  "key": "product[title_ar]",
-                  "value": "أيفون",
-                  "type": "text"
-                },
-                {
-                  "key": "product[brand_id]",
-                  "value": "1",
-                  "type": "text"
-                },
-                {
-                  "key": "product[image]",
-                  "value": "",
-                  "type": "file"
-                }
+                { "key": "product[title_en]", "value": "iPhone", "type": "text" },
+                { "key": "product[title_ar]", "value": "أيفون", "type": "text" },
+                { "key": "product[alt_text_en]", "value": "iPhone Image", "type": "text" },
+                { "key": "product[alt_text_ar]", "value": "صورة أيفون", "type": "text" },
+                { "key": "product[brand_id]", "value": "1", "type": "text" },
+                { "key": "product[is_published]", "value": "false", "type": "text" },
+                { "key": "product[image]", "value": "", "type": "file" }
               ]
             },
             "url": {
               "raw": "http://localhost:3000/api/products",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "products"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "products"]
             }
           }
         },
@@ -895,34 +433,18 @@
           "name": "Update Product",
           "request": {
             "method": "PATCH",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "body": {
               "mode": "formdata",
               "formdata": [
-                {
-                  "key": "product[title_en]",
-                  "value": "iPhone 15",
-                  "type": "text"
-                }
+                { "key": "product[title_en]", "value": "iPhone 15", "type": "text" },
+                { "key": "product[is_published]", "value": "true", "type": "text" }
               ]
             },
             "url": {
               "raw": "http://localhost:3000/api/products/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "products",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "products", "1"]
             }
           }
         },
@@ -930,216 +452,28 @@
           "name": "Delete Product",
           "request": {
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/products/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "products",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "products", "1"]
             }
           }
         }
       ]
     },
     {
-      "name": "6. Leaderships",
+      "name": "6. Faqs (Admin)",
       "item": [
         {
-          "name": "List Leadership",
+          "name": "List Faqs",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:3000/api/leaderships",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "leaderships"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Show Leadership",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:3000/api/leaderships/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "leaderships",
-                "1"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Create Leadership",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "leadership[name_en]",
-                  "value": "John Doe",
-                  "type": "text"
-                },
-                {
-                  "key": "leadership[name_ar]",
-                  "value": "جون",
-                  "type": "text"
-                },
-                {
-                  "key": "leadership[position_en]",
-                  "value": "CEO",
-                  "type": "text"
-                },
-                {
-                  "key": "leadership[image]",
-                  "value": "",
-                  "type": "file"
-                }
-              ]
-            },
-            "url": {
-              "raw": "http://localhost:3000/api/leaderships",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "leaderships"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Update Leadership",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "leadership[position_en]",
-                  "value": "Founder & CEO",
-                  "type": "text"
-                }
-              ]
-            },
-            "url": {
-              "raw": "http://localhost:3000/api/leaderships/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "leaderships",
-                "1"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Delete Leadership",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:3000/api/leaderships/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "leaderships",
-                "1"
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "7. Faqs",
-      "item": [
-        {
-          "name": "List Faq",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/faqs",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "faqs"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "faqs"]
             }
           }
         },
@@ -1147,24 +481,11 @@
           "name": "Show Faq",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/faqs/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "faqs",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "faqs", "1"]
             }
           }
         },
@@ -1173,30 +494,17 @@
           "request": {
             "method": "POST",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"faq\": {\n    \"question_en\": \"How does this work?\",\n    \"answer_en\": \"Like magic.\"\n  }\n}"
+              "raw": "{\n  \"faq\": {\n    \"question_en\": \"How does this work?\",\n    \"question_ar\": \"كيف يعمل هذا؟\",\n    \"answer_en\": \"Like magic.\",\n    \"answer_ar\": \"مثل السحر.\",\n    \"is_published\": false\n  }\n}"
             },
             "url": {
               "raw": "http://localhost:3000/api/faqs",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "faqs"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "faqs"]
             }
           }
         },
@@ -1205,31 +513,17 @@
           "request": {
             "method": "PATCH",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"faq\": {\n    \"answer_en\": \"Even more magic.\"\n  }\n}"
+              "raw": "{\n  \"faq\": {\n    \"answer_en\": \"Even more magic.\",\n    \"is_published\": true\n  }\n}"
             },
             "url": {
               "raw": "http://localhost:3000/api/faqs/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "faqs",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "faqs", "1"]
             }
           }
         },
@@ -1237,53 +531,28 @@
           "name": "Delete Faq",
           "request": {
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/faqs/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "faqs",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "faqs", "1"]
             }
           }
         }
       ]
     },
     {
-      "name": "8. Users",
+      "name": "7. Users (Admin)",
       "item": [
         {
-          "name": "List User",
+          "name": "List Users",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/users",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "users"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "users"]
             }
           }
         },
@@ -1291,24 +560,11 @@
           "name": "Show User",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/users/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "users",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "users", "1"]
             }
           }
         },
@@ -1316,39 +572,18 @@
           "name": "Update User",
           "request": {
             "method": "PATCH",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "body": {
               "mode": "formdata",
               "formdata": [
-                {
-                  "key": "user[name]",
-                  "value": "Updated Name",
-                  "type": "text"
-                },
-                {
-                  "key": "user[image]",
-                  "value": "",
-                  "type": "file"
-                }
+                { "key": "user[name]", "value": "Updated Name", "type": "text" },
+                { "key": "user[image]", "value": "", "type": "file" }
               ]
             },
             "url": {
               "raw": "http://localhost:3000/api/users/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "users",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "users", "1"]
             }
           }
         },
@@ -1356,53 +591,28 @@
           "name": "Delete User",
           "request": {
             "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/users/1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "users",
-                "1"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "users", "1"]
             }
           }
         }
       ]
     },
     {
-      "name": "9. Company Data",
+      "name": "8. Company Data (Admin)",
       "item": [
         {
           "name": "Show Company Data",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/company_data",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "company_data"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "company_data"]
             }
           }
         },
@@ -1411,14 +621,8 @@
           "request": {
             "method": "PATCH",
             "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
@@ -1426,44 +630,142 @@
             },
             "url": {
               "raw": "http://localhost:3000/api/company_data",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "company_data"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "company_data"]
             }
           }
         }
       ]
     },
     {
-      "name": "10. Enums",
+      "name": "9. Enums",
       "item": [
         {
           "name": "Get Enums",
           "request": {
             "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{token}}"
-              }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
               "raw": "http://localhost:3000/api/enums",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "api",
-                "enums"
-              ]
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "enums"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "10. Website (Public - No Auth)",
+      "item": [
+        {
+          "name": "Get Page - Home",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/get_page?page=home",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "get_page"],
+              "query": [{ "key": "page", "value": "home" }]
+            }
+          }
+        },
+        {
+          "name": "Get Page - Brands",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/get_page?page=brands",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "get_page"],
+              "query": [{ "key": "page", "value": "brands" }]
+            }
+          }
+        },
+        {
+          "name": "Get Page - Blogs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/get_page?page=blogs",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "get_page"],
+              "query": [{ "key": "page", "value": "blogs" }]
+            }
+          }
+        },
+        {
+          "name": "Get Page - Other (sections only)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/get_page?page=about",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "get_page"],
+              "query": [{ "key": "page", "value": "about" }]
+            }
+          }
+        },
+        {
+          "name": "Get All Blogs (Published)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/get_all_blogs",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "get_all_blogs"]
+            }
+          }
+        },
+        {
+          "name": "Show Blog (Public)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/show_blog/1",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "show_blog", "1"]
+            }
+          }
+        },
+        {
+          "name": "Show Brand Products (Published)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/show_brand_products/1",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "show_brand_products", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get All FAQs (Published)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/get_all_faqs",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "get_all_faqs"]
+            }
+          }
+        },
+        {
+          "name": "Show FAQ (Public)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/show_faq/1",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "show_faq", "1"]
             }
           }
         }

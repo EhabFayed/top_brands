@@ -10,7 +10,7 @@ module Api
     # PUT/PATCH /api/company_data
     def update
       if @company_datum.update(company_data_params)
-        render json: @company_datum
+        render json: {message: "Company data updated successfully"}, status: :ok
       else
         render json: { errors: @company_datum.errors.full_messages }, status: :unprocessable_entity
       end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_04_18_001612) do
+ActiveRecord::Schema[8.0].define(version: 2026_04_20_001640) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -85,6 +85,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_18_001612) do
     t.integer "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "alt_ar"
+    t.string "alt_en"
     t.index ["slug"], name: "index_blogs_on_slug", unique: true
     t.index ["slug_ar"], name: "index_blogs_on_slug_ar", unique: true
   end
@@ -97,6 +99,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_18_001612) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_international", default: false
+    t.boolean "is_published", default: false
   end
 
   create_table "company_data", force: :cascade do |t|
@@ -128,13 +131,14 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_18_001612) do
 
   create_table "contents", force: :cascade do |t|
     t.string "key", null: false
-    t.text "value"
     t.string "content_type"
     t.integer "position", default: 0, null: false
     t.string "parentable_type"
     t.bigint "parentable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "value_en"
+    t.text "value_ar"
     t.index ["parentable_type", "parentable_id"], name: "index_contents_on_parentable"
     t.index ["parentable_type", "parentable_id"], name: "index_contents_on_parentable_type_and_parentable_id"
     t.index ["position"], name: "index_contents_on_position"
@@ -188,6 +192,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_18_001612) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "brand_id"
+    t.boolean "is_published", default: false
     t.index ["brand_id"], name: "index_products_on_brand_id"
   end
 

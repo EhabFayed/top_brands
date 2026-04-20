@@ -25,10 +25,24 @@ class Blog < ApplicationRecord
 
   has_many :faqs, as: :parentable, dependent: :destroy
   has_many :blog_contents, dependent: :destroy
-  has_many :blog_photos, dependent: :destroy
-  accepts_nested_attributes_for :blog_photos, allow_destroy: true, reject_if: :all_blank
+  # has_many :blog_photos, dependent: :destroy
+  # accepts_nested_attributes_for :blog_photos, allow_destroy: true, reject_if: :all_blank
 
+  has_one_attached :image
 
+  def cached_image_url
+    return nil unless image.attached?
+
+    Rails.cache.fetch("blog_image_url_#{id}", expires_in: 12.hours) do
+      Rails.application.routes.url_helpers.rails_blob_url(image)
+    end
+  end
+
+  private
+
+  def clear_image_cache
+    Rails.cache.delete("blog_image_url_#{id}")
+  end
 
   # app/models/blog.rb
   def self.find_by_any_slug(slug)
