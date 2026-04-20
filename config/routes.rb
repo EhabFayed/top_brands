@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :sections
     get "enums", to: "enums#index"
+    get "enums/get_all_counts", to: "enums#get_all_counts"
     post "signup", to: "authentication#signup"
     post "login", to: "authentication#login"
     get "web_site/get_page", to: "web_site#get_page"
@@ -15,9 +16,7 @@ Rails.application.routes.draw do
     get "web_site/get_all_blogs", to: "web_site#get_all_blogs"
 
     resources :users
-    resources :blogs do
-      resources :blog_photos, only: [:create, :destroy] # Optional nested
-    end
+    resources :blogs
     resources :blog_contents
     resources :brands
     resource :company_data, only: [:show, :update] # Singleton resource

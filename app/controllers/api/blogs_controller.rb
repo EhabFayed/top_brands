@@ -45,7 +45,7 @@ module Api
         :title_ar, :title_en, :description_ar, :description_en,
         :meta_title_ar, :meta_title_en, :slug, :slug_ar,
         :meta_description_ar, :meta_description_en, :is_published, :category,
-        :photo, :alt_ar, :alt_en,
+        :image, :alt_ar, :alt_en,
         contents_attributes: [
           :id, :key, :value, :content_type, :position, :_destroy,
           content_photos_attributes: [:id, :photo, :alt_ar, :alt_en, :_destroy]
@@ -54,7 +54,7 @@ module Api
     end
 
     def serialize_blogs(blogs)
-      blogs.includes(:blog_photos, :blog_contents, :faqs).map { |b| serialize_blog(b) }
+      blogs.includes(:blog_contents, :faqs).map { |b| serialize_blog(b) }
     end
 
     def serialize_blog(blog)
@@ -74,8 +74,7 @@ module Api
         meta_description_en: blog.meta_description_en,
         is_published: blog.is_published,
         category: blog.category,
-        photo: blog.cached_image_url,
-        # photos: blog.blog_photos.map { |p| { id: p.id, alt_ar: p.alt_ar, alt_en: p.alt_en, photo_url: p.cached_photo_url } },
+        image: blog.cached_image_url,
         contents: blog.blog_contents.map { |c| { id: c.id, content_ar: c.content_ar, content_en: c.content_en, photos: c.blog_con_photos.map {|cp| {url: cp.cached_photo_url, alt_ar: cp.alt_ar, alt_en: cp.alt_en} } } }
       }
     end

@@ -110,7 +110,6 @@ module Api
         is_published: blog.is_published,
         category: blog.category,
         photo: blog.cached_image_url,
-        # photos: blog.blog_photos.map { |p| { id: p.id, alt_ar: p.alt_ar, alt_en: p.alt_en, photo_url: p.cached_photo_url } },
         contents: blog.blog_contents.map { |c| { id: c.id, content_ar: c.content_ar, content_en: c.content_en, photos: c.blog_con_photos.map {|cp| {url: cp.cached_photo_url, alt_ar: cp.alt_ar, alt_en: cp.alt_en} } } }
       }
     end

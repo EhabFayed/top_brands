@@ -26,9 +26,9 @@ class Blog < ApplicationRecord
   has_many :faqs, as: :parentable, dependent: :destroy
   has_many :blog_contents, dependent: :destroy
   # has_many :blog_photos, dependent: :destroy
-  accepts_nested_attributes_for :blog_photos, allow_destroy: true, reject_if: :all_blank
+  # accepts_nested_attributes_for :blog_photos, allow_destroy: true, reject_if: :all_blank
 
-has_one_attached :image
+  has_one_attached :image
 
   def cached_image_url
     return nil unless image.attached?
