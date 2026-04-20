@@ -49,7 +49,7 @@ module Api
     def product_params
       params.require(:product).permit(
         :title_ar, :title_en, :description_ar, :description_en,
-        :alt_text_ar, :alt_text_en, :display_order, :size, :brand_id, :image
+        :alt_text_ar, :alt_text_en, :display_order, :size, :brand_id, :image,:is_published
       )
     end
   end

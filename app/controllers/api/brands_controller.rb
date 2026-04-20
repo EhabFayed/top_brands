@@ -41,7 +41,7 @@ module Api
     end
 
     def brand_params
-      params.require(:brand).permit(:title_ar, :title_en, :alt_text_ar, :alt_text_en, :image)
+      params.require(:brand).permit(:title_ar, :title_en, :alt_text_ar, :alt_text_en, :image,:is_published)
     end
 
     def serialize_brands(brands)
@@ -56,6 +56,7 @@ module Api
         alt_text_ar: brand.alt_text_ar,
         alt_text_en: brand.alt_text_en,
         image_url: brand.cached_image_url,
+        is_published: brand.is_published,
         products: brand.try(:products).map { |p| { id: p.id, title_ar: p.title_ar, title_en: p.title_en } }
       }
     end
