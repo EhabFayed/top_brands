@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_04_20_001640) do
+ActiveRecord::Schema[8.0].define(version: 2026_04_20_202344) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -100,6 +100,12 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_20_001640) do
     t.datetime "updated_at", null: false
     t.boolean "is_international", default: false
     t.boolean "is_published", default: false
+    t.text "description_ar"
+    t.text "description_en"
+    t.string "meta_title_ar"
+    t.string "meta_title_en"
+    t.text "meta_description_ar"
+    t.text "meta_description_en"
   end
 
   create_table "company_data", force: :cascade do |t|

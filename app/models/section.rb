@@ -81,8 +81,8 @@ class Section < ApplicationRecord
   has_one_attached :image
 
   validates :page,         presence: true
-  validates :section_type, presence: true
-  validates :section_type, uniqueness: { scope: :page }
+  # validates :section_type, presence: true
+  # validates :section_type, uniqueness: { scope: :page }
 
   after_commit :clear_section_cache, on: %i[update destroy]
 
