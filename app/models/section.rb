@@ -74,7 +74,7 @@ class Section < ApplicationRecord
   }.freeze
 
   enumerize :page,         in: PAGES,         predicates: true
-  enumerize :section_type, in: SECTION_TYPES, predicates: true
+  # enumerize :section_type, in: SECTION_TYPES, predicates: true
 
   has_many :contents, -> { order(:position) }, as: :parentable, dependent: :destroy
   accepts_nested_attributes_for :contents, allow_destroy: true, reject_if: :all_blank
