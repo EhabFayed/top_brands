@@ -56,10 +56,10 @@ Rails.application.configure do
   # Set host to be used by links generated in mailer templates.
   # Use environment variable or default to the domain
   config.action_mailer.default_url_options = {
-    host: ENV.fetch("RAILS_HOST", "topbrand_backend.mila-knight.com"),
+    host: ENV.fetch("RAILS_HOST", "back.topbrands-sy.com"),
     protocol: ENV.fetch("RAILS_PROTOCOL", "https")
   }
-  Rails.application.routes.default_url_options[:host] = "topbrand_backend.mila-knight.com"
+  Rails.application.routes.default_url_options[:host] = "back.topbrands-sy.com"
   Rails.application.routes.default_url_options[:protocol] = "https"
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.

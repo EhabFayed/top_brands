@@ -38,7 +38,7 @@ services:
        REDIS_URL: redis://redis:6379/0
        RAILS_LOG_TO_STDOUT: "true"
        RAILS_SERVE_STATIC_FILES: "true"
-       RAILS_HOST: topbrand_backend.mila-knight.com
+       RAILS_HOST: back.topbrands-sy.com
        RAILS_PROTOCOL: https
        RAILS_ASSUME_SSL: "false"
        RAILS_FORCE_SSL: "false"
