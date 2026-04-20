@@ -7,15 +7,15 @@ module Api
         sections = Section.where(page: params[:page]).order(:position)
         if params[:page] == "home"
           brand = Brand.where(is_published: true).all
-          render json: {brands: serialize_brands(brand), sections: serialize_sections(sections)}
+          render json: filter_by_locale({brands: serialize_brands(brand), sections: serialize_sections(sections)})
         elsif params[:page] == "brands"
           brand = Brand.where(is_published: true).all
-          render json: {brands: serialize_brands(brand), sections: serialize_sections(sections)}
+          render json: filter_by_locale({brands: serialize_brands(brand), sections: serialize_sections(sections)})
         elsif params[:page] == "blogs"
           blogs = Blog.where(is_published: true).all
-          render json: {blogs: serialize_blogs(blogs), sections: serialize_sections(sections)}
+          render json: filter_by_locale({blogs: serialize_blogs(blogs), sections: serialize_sections(sections)})
         else
-          render json: serialize_sections(sections)
+          render json: filter_by_locale(serialize_sections(sections))
         end
       else
         render json: { errors: "Page not found" }, status: :not_found
@@ -23,27 +23,51 @@ module Api
     end
     def get_all_blogs
       blogs = Blog.where(is_published: true).all
-      render json: serialize_blogs(blogs)
+      render json: filter_by_locale(serialize_blogs(blogs))
     end
     def show_blog
       blog = Blog.find(params[:id])
-      render json: serialize_blog(blog)
+      render json: filter_by_locale(serialize_blog(blog))
     end
     def show_brand_products
       brand = Brand.find(params[:id])
       products = Product.where(brand_id: brand.id, is_published: true).all
-      render json: {brand: serialize_brand(brand), products: serialize_products(products)}
+      render json: filter_by_locale({brand: serialize_brand(brand), products: serialize_products(products)})
     end
     def get_all_faqs
       faqs = Faq.where(is_published: true).all
-      render json: serialize_faqs(faqs)
+      render json: filter_by_locale(serialize_faqs(faqs))
     end
     def show_faq
       faq = Faq.find(params[:id])
-      render json: serialize_faq(faq)
+      render json: filter_by_locale(serialize_faq(faq))
     end
 
     private
+
+    def filter_by_locale(data)
+      locale = request.headers['locale']
+      return data unless %w[ar en].include?(locale)
+
+      if data.is_a?(Hash)
+        filtered_hash = {}
+        data.each do |key, value|
+          key_str = key.to_s
+          if key_str.end_with?("_ar", "_en")
+            if key_str.end_with?("_#{locale}")
+              filtered_hash[key_str.sub("_#{locale}", "").to_sym] = filter_by_locale(value)
+            end
+          else
+            filtered_hash[key] = filter_by_locale(value)
+          end
+        end
+        filtered_hash
+      elsif data.is_a?(Array)
+        data.map { |item| filter_by_locale(item) }
+      else
+        data
+      end
+    end
     def serialize_faqs(faqs)
       faqs.map { |f| serialize_faq(f) }
     end
