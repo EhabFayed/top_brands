@@ -48,7 +48,7 @@ services:
     ports:
       - "9007:9007"  # Map host port 9007 to container port 9007
     volumes:
-      - storage:/rails/storage
+      - storage:/app/storage
     command: ["bash", "-c", "rm -f tmp/pids/server.pid && bin/rails server -b 0.0.0.0 -p ${PORT:-9007}"]
     healthcheck:
       test: ["CMD", "sh", "-c", "curl -f http://localhost:${PORT:-9007}/up || exit 1"]
@@ -71,7 +71,7 @@ services:
       REDIS_URL: redis://redis:6379/0
       SECRET_KEY_BASE: "8e9c2d91daaa15e417fc73fd7f55289bd9f966d524a7197018b8c2aa31629431"
     volumes:
-      - storage:/rails/storage
+      - storage:/app/storage
     command: ["bundle", "exec", "sidekiq"]
 
 volumes:
