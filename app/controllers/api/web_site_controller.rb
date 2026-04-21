@@ -6,7 +6,7 @@ module Api
       if params[:page].present?
         sections = Section.where(page: params[:page]).order(:position)
         if params[:page] == "home"
-          brand = Brand.where(is_published: true).all
+          brand = Brand.where(is_published: true, is_highlighted: true).all
           render json: filter_by_locale({brands: serialize_brands(brand), sections: serialize_sections(sections)})
         elsif params[:page] == "brands"
           brand = Brand.where(is_published: true).all
@@ -42,8 +42,30 @@ module Api
       faq = Faq.find(params[:id])
       render json: filter_by_locale(serialize_faq(faq))
     end
+    def get_company_data
+      company_data = CompanyDatum.first
+      render json: filter_by_locale(serialize_company_data(company_data))
+    end
 
     private
+    def serialize_company_data(company_data)
+      {
+        id: company_data.id,
+        address_ar: company_data.address_ar,
+        address_en: company_data.address_en,
+        phone_number_1: company_data.phone_number_1,
+        phone_number_2: company_data.phone_number_2,
+        whatsapp_number: company_data.whatsapp_number,
+        email: company_data.email,
+        google_maps_url: company_data.google_maps_url,
+        working_hours_ar: company_data.working_hours_ar,
+        working_hours_en: company_data.working_hours_en,
+        facebook_url: company_data.facebook_url,
+        instagram_url: company_data.instagram_url,
+        twitter_url: company_data.twitter_url,
+        linkedin_url: company_data.linkedin_url
+      }
+    end
 
     def filter_by_locale(data)
       locale = request.headers['locale']
@@ -116,7 +138,7 @@ module Api
         meta_description_ar: brand.meta_description_ar,
         meta_description_en: brand.meta_description_en,
         is_published: brand.is_published,
-        products: brand.try(:products).map { |p| { id: p.id, title_ar: p.title_ar, title_en: p.title_en } }
+        products: brand.try(:products).map { |p| { id: p.id, title_ar: p.title_ar, title_en: p.title_en,image_url: p.cached_image_url } }
       }
     end
     def serialize_blogs(blogs)
