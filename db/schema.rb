@@ -106,6 +106,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_21_141813) do
     t.string "meta_title_en"
     t.text "meta_description_ar"
     t.text "meta_description_en"
+    t.boolean "is_highlighted", default: false
   end
 
   create_table "company_data", force: :cascade do |t|
