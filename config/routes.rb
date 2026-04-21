@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     get "web_site/show_faq/:id", to: "web_site#show_faq"
     get "web_site/show_blog/:id", to: "web_site#show_blog"
     get "web_site/get_all_blogs", to: "web_site#get_all_blogs"
-
+    get "web_site/get_company_data", to: "web_site#get_company_data"
     resources :users
     resources :blogs
     resources :blog_contents
