@@ -14,7 +14,16 @@ class Brand < ApplicationRecord
     end
   end
 
+  validate :limit_highlighted_brands, if: :will_save_change_to_is_highlighted?
+
   private
+
+
+  def limit_highlighted_brands
+    if Brand.where(is_highlighted: true).where.not(id: id).count >= 12
+      errors.add(:is_highlighted, "Maximum limit of 12 highlighted brands reached")
+    end
+  end
 
   def clear_image_cache
     Rails.cache.delete("brand_image_url_#{id}")
