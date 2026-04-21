@@ -15,6 +15,7 @@ class Section < ApplicationRecord
     logestics_services: "10",
     merchandising_services: "11",
     marketing_services: "12",
+    contact_page: "13",
   }.freeze
 
   SECTION_TYPES = {
