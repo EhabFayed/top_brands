@@ -4,6 +4,8 @@ class Brand < ApplicationRecord
   has_many :products, dependent: :destroy
   has_one_attached :image
 
+  after_commit :clear_image_cache, on: %i[update destroy]
+
   def cached_image_url
     return nil unless image.attached?
 
