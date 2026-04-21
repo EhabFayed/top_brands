@@ -10,7 +10,7 @@ class ContentPhoto < ApplicationRecord
     return nil unless photo.attached?
 
     Rails.cache.fetch("content_photo_url_#{id}", expires_in: 12.hours) do
-      Rails.application.routes.url_helpers.rails_blob_url(photo)
+      Rails.application.routes.url_helpers.url_for(photo)
     end
   end
 
