@@ -63,7 +63,7 @@ module Api
         meta_title_en: brand.meta_title_en,
         meta_description_ar: brand.meta_description_ar,
         meta_description_en: brand.meta_description_en,
-        products: brand.try(:products).map { |p| { id: p.id, title_ar: p.title_ar, title_en: p.title_en } }
+        products: brand.try(:products).map { |p| { id: p.id, title_ar: p.title_ar, title_en: p.title_en, image_url: p.try(:cached_image_url) } }
       }
     end
   end
