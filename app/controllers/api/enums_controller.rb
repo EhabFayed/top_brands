@@ -14,7 +14,7 @@ module Api
         products_count: Product.count,
         brands_count: Brand.count,
         faqs_count: Faq.count,
-        company_data_count: CompanyDatum.first.attributes.values.compact.count
+        home_brand_images: Brand.where(is_published: true, is_highlighted: true).count
       }
     end
   end
