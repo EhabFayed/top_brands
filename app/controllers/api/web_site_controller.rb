@@ -117,7 +117,8 @@ module Api
         is_published: product.is_published,
         brand_id: product.brand_id,
         brand: product.brand,
-        faqs: product.faqs
+        faqs: product.faqs,
+        size: product.size
       }
     end
     def serialize_brands(brands)
@@ -138,7 +139,7 @@ module Api
         meta_description_ar: brand.meta_description_ar,
         meta_description_en: brand.meta_description_en,
         is_published: brand.is_published,
-        products: brand.try(:products).map { |p| { id: p.id, title_ar: p.title_ar, title_en: p.title_en,image_url: p.cached_image_url } }
+        products: brand.try(:products).map { |p| { id: p.id, title_ar: p.title_ar, title_en: p.title_en,image_url: p.cached_image_url,size: p.size } }
       }
     end
     def serialize_blogs(blogs)
