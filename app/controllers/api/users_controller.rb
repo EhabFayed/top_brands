@@ -30,12 +30,8 @@ module Api
     end
 
     def destroy
-      unless @user.id == @current_user.id
-        return render json: { error: 'Unauthorized access' }, status: :unauthorized
-      end
-
       @user.destroy!
-      head :no_content
+      render json: {message: "User deleted successfully"}, status: :ok
     end
 
     private
