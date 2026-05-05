@@ -5,8 +5,11 @@ module Api
     before_action :set_brand, only: [:show, :update, :destroy]
 
     def index
-      @brands = Brand.try(:includes, :products).all
-      render json: serialize_brands(@brands)
+      @pagy, @brands = pagy(Brand.includes(:products).all, limit: params.fetch(:items, 20).to_i)
+      render json: {
+        pagination: pagination_metadata(@pagy),
+        data: serialize_brands(@brands)
+      }
     end
 
     def show

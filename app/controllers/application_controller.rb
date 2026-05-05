@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include Pagy::Backend
+
   before_action :authorize_request
 
   def decoded_token
@@ -38,5 +40,17 @@ class ApplicationController < ActionController::API
 
   def require_admin_or_manager!
     require_role!(:admin, :manager)
+  end
+
+  # Returns a hash of Pagy metadata suitable for JSON responses.
+  def pagination_metadata(pagy)
+    {
+      current_page:   pagy.page,
+      total_pages:    pagy.pages,
+      total_count:    pagy.count,
+      items_per_page: pagy.limit,   # Pagy v9: renamed from .items → .limit
+      next_page:      pagy.next,
+      prev_page:      pagy.prev
+    }
   end
 end

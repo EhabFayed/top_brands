@@ -75,15 +75,54 @@
       "name": "2. Blogs (Admin & Manager only)",
       "item": [
         {
-          "name": "List Blogs",
+          "name": "List Blogs — Page 1 (default)",
           "request": {
             "method": "GET",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
-              "raw": "http://localhost:3000/api/blogs",
+              "raw": "http://localhost:3000/api/blogs?page=1&items=20",
               "protocol": "http", "host": ["localhost"], "port": "3000",
-              "path": ["api", "blogs"]
-            }
+              "path": ["api", "blogs"],
+              "query": [
+                { "key": "page",  "value": "1",  "description": "Page number (default: 1)" },
+                { "key": "items", "value": "20", "description": "Items per page (default: 20)" }
+              ]
+            },
+            "description": "Returns a paginated list of blogs.\n\n**Response shape:**\n```json\n{\n  \"pagination\": {\n    \"current_page\": 1,\n    \"total_pages\": 5,\n    \"total_count\": 98,\n    \"items_per_page\": 20,\n    \"next_page\": 2,\n    \"prev_page\": null\n  },\n  \"data\": [ { \"id\": 1, \"title_en\": \"...\", \"...\" } ]\n}\n```\n\n**Pagination params:**\n- `page` — page number to fetch (integer, default `1`)\n- `items` — number of records per page (integer, default `20`)\n\nUse `pagination.next_page` / `pagination.prev_page` to navigate (null means no more pages)."
+          }
+        },
+        {
+          "name": "List Blogs — Page 2",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "http://localhost:3000/api/blogs?page=2&items=20",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "blogs"],
+              "query": [
+                { "key": "page",  "value": "2" },
+                { "key": "items", "value": "20" }
+              ]
+            },
+            "description": "Example of fetching the second page."
+          }
+        },
+        {
+          "name": "List Blogs — Custom page size (10 per page)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "http://localhost:3000/api/blogs?page=1&items=10",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "blogs"],
+              "query": [
+                { "key": "page",  "value": "1" },
+                { "key": "items", "value": "10", "description": "Override default page size" }
+              ]
+            },
+            "description": "Example of fetching only 10 blogs per page."
           }
         },
         {
@@ -323,15 +362,54 @@
       "name": "4. Brands (Admin, Manager & Editor — delete: Admin & Manager only)",
       "item": [
         {
-          "name": "List Brands",
+          "name": "List Brands — Page 1 (default)",
           "request": {
             "method": "GET",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
-              "raw": "http://localhost:3000/api/brands",
+              "raw": "http://localhost:3000/api/brands?page=1&items=20",
               "protocol": "http", "host": ["localhost"], "port": "3000",
-              "path": ["api", "brands"]
-            }
+              "path": ["api", "brands"],
+              "query": [
+                { "key": "page",  "value": "1",  "description": "Page number (default: 1)" },
+                { "key": "items", "value": "20", "description": "Items per page (default: 20)" }
+              ]
+            },
+            "description": "Returns a paginated list of brands (each with their products).\n\n**Response shape:**\n```json\n{\n  \"pagination\": {\n    \"current_page\": 1,\n    \"total_pages\": 3,\n    \"total_count\": 45,\n    \"items_per_page\": 20,\n    \"next_page\": 2,\n    \"prev_page\": null\n  },\n  \"data\": [ { \"id\": 1, \"title_en\": \"Apple\", \"products\": [ \"...\" ] } ]\n}\n```\n\n**Pagination params:**\n- `page` — page number (default `1`)\n- `items` — records per page (default `20`)"
+          }
+        },
+        {
+          "name": "List Brands — Page 2",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "http://localhost:3000/api/brands?page=2&items=20",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "brands"],
+              "query": [
+                { "key": "page",  "value": "2" },
+                { "key": "items", "value": "20" }
+              ]
+            },
+            "description": "Example of fetching the second page."
+          }
+        },
+        {
+          "name": "List Brands — Custom page size (10 per page)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "http://localhost:3000/api/brands?page=1&items=10",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "brands"],
+              "query": [
+                { "key": "page",  "value": "1" },
+                { "key": "items", "value": "10" }
+              ]
+            },
+            "description": "Example of fetching only 10 brands per page."
           }
         },
         {
@@ -406,15 +484,54 @@
       "name": "5. Products (Admin, Manager & Editor — delete: Admin & Manager only)",
       "item": [
         {
-          "name": "List Products",
+          "name": "List Products — Page 1 (default)",
           "request": {
             "method": "GET",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "url": {
-              "raw": "http://localhost:3000/api/products",
+              "raw": "http://localhost:3000/api/products?page=1&items=20",
               "protocol": "http", "host": ["localhost"], "port": "3000",
-              "path": ["api", "products"]
-            }
+              "path": ["api", "products"],
+              "query": [
+                { "key": "page",  "value": "1",  "description": "Page number (default: 1)" },
+                { "key": "items", "value": "20", "description": "Items per page (default: 20)" }
+              ]
+            },
+            "description": "Returns a paginated list of products ordered by display_order.\n\n**Response shape:**\n```json\n{\n  \"pagination\": {\n    \"current_page\": 1,\n    \"total_pages\": 10,\n    \"total_count\": 200,\n    \"items_per_page\": 20,\n    \"next_page\": 2,\n    \"prev_page\": null\n  },\n  \"data\": [ { \"id\": 1, \"title_en\": \"iPhone\", \"...\" } ]\n}\n```\n\n**Pagination params:**\n- `page` — page number (default `1`)\n- `items` — records per page (default `20`)\n\nUse `pagination.next_page` / `pagination.prev_page` to navigate (null means no more pages)."
+          }
+        },
+        {
+          "name": "List Products — Page 2",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "http://localhost:3000/api/products?page=2&items=20",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "products"],
+              "query": [
+                { "key": "page",  "value": "2" },
+                { "key": "items", "value": "20" }
+              ]
+            },
+            "description": "Example of fetching the second page."
+          }
+        },
+        {
+          "name": "List Products — Custom page size (10 per page)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "http://localhost:3000/api/products?page=1&items=10",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "products"],
+              "query": [
+                { "key": "page",  "value": "1" },
+                { "key": "items", "value": "10" }
+              ]
+            },
+            "description": "Example of fetching only 10 products per page."
           }
         },
         {
@@ -683,7 +800,7 @@
       "name": "10. Website (Public - No Auth)",
       "item": [
         {
-          "name": "Get Page - Home",
+          "name": "Get Page - Home (no pagination — curated highlights)",
           "request": {
             "method": "GET",
             "header": [],
@@ -692,7 +809,236 @@
               "protocol": "http", "host": ["localhost"], "port": "3000",
               "path": ["api", "web_site", "get_page"],
               "query": [{ "key": "page", "value": "home" }]
+            },
+            "description": "Returns highlighted brands and page sections. No pagination — highlighted brands are a curated fixed list."
+          }
+        },
+        {
+          "name": "Get Page - Brands (Page 1)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/get_page?page=brands&page_num=1&items=20",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "get_page"],
+              "query": [
+                { "key": "page",     "value": "brands", "description": "Fixed — selects the brands page" },
+                { "key": "page_num", "value": "1",      "description": "Pagination page number (use 'page' param — value '1')" },
+                { "key": "items",    "value": "20",     "description": "Items per page (default: 20)" }
+              ]
+            },
+            "description": "Returns published brands + page sections.\n\n**⚠️ Note:** Rails reads pagination from the `page` query param. Since `page` is already used for the page name, send the page number via the standard `page` param — Pagy reads it from `params[:page]` only when it's an integer. Use the URL below instead:\n\n`GET /api/web_site/get_page?page=brands&page=1&items=20`\n\n**Response shape:**\n```json\n{\n  \"pagination\": {\n    \"current_page\": 1,\n    \"total_pages\": 3,\n    \"total_count\": 45,\n    \"items_per_page\": 20,\n    \"next_page\": 2,\n    \"prev_page\": null\n  },\n  \"brands\": [ { \"id\": 1, \"title_en\": \"Apple\", \"...\" } ],\n  \"sections\": [ ... ]\n}\n```"
+          }
+        },
+        {
+          "name": "Get Page - Brands (Page 2)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/get_page?page=brands&page=2&items=20",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "get_page"],
+              "query": [
+                { "key": "page",  "value": "brands" },
+                { "key": "page",  "value": "2" },
+                { "key": "items", "value": "20" }
+              ]
+            },
+            "description": "Second page of brands."
+          }
+        },
+        {
+          "name": "Get Page - Blogs (Page 1)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/get_page?page=blogs&page=1&items=20",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "get_page"],
+              "query": [
+                { "key": "page",  "value": "blogs", "description": "Fixed — selects the blogs page" },
+                { "key": "page",  "value": "1",     "description": "Pagination page number" },
+                { "key": "items", "value": "20",    "description": "Items per page (default: 20)" }
+              ]
+            },
+            "description": "Returns published blogs + page sections.\n\n**Response shape:**\n```json\n{\n  \"pagination\": {\n    \"current_page\": 1,\n    \"total_pages\": 5,\n    \"total_count\": 98,\n    \"items_per_page\": 20,\n    \"next_page\": 2,\n    \"prev_page\": null\n  },\n  \"blogs\": [ { \"id\": 1, \"title_en\": \"...\", \"...\" } ],\n  \"sections\": [ ... ]\n}\n```"
+          }
+        },
+        {
+          "name": "Get Page - Blogs (Page 2)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/get_page?page=blogs&page=2&items=20",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "get_page"],
+              "query": [
+                { "key": "page",  "value": "blogs" },
+                { "key": "page",  "value": "2" },
+                { "key": "items", "value": "20" }
+              ]
+            },
+            "description": "Second page of blogs."
+          }
+        },
+        {
+          "name": "Get Page - Other (sections only)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/get_page?page=about",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "get_page"],
+              "query": [{ "key": "page", "value": "about" }]
+            },
+            "description": "Returns sections only for pages that are not home/brands/blogs. No pagination."
+          }
+        },
+        {
+          "name": "Get All Blogs — Page 1 (default)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/get_all_blogs?page=1&items=20",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "get_all_blogs"],
+              "query": [
+                { "key": "page",  "value": "1",  "description": "Page number (default: 1)" },
+                { "key": "items", "value": "20", "description": "Items per page (default: 20)" }
+              ]
+            },
+            "description": "Returns paginated list of all published blogs.\n\n**Response shape:**\n```json\n{\n  \"pagination\": {\n    \"current_page\": 1,\n    \"total_pages\": 5,\n    \"total_count\": 98,\n    \"items_per_page\": 20,\n    \"next_page\": 2,\n    \"prev_page\": null\n  },\n  \"data\": [ { \"id\": 1, \"title_en\": \"...\", \"...\" } ]\n}\n```"
+          }
+        },
+        {
+          "name": "Get All Blogs — Page 2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/get_all_blogs?page=2&items=20",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "get_all_blogs"],
+              "query": [
+                { "key": "page",  "value": "2" },
+                { "key": "items", "value": "20" }
+              ]
+            },
+            "description": "Second page of published blogs."
+          }
+        },
+        {
+          "name": "Get All Blogs — Custom page size (10 per page)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/get_all_blogs?page=1&items=10",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "get_all_blogs"],
+              "query": [
+                { "key": "page",  "value": "1" },
+                { "key": "items", "value": "10" }
+              ]
             }
+          }
+        },
+        {
+          "name": "Show Blog (Public)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/show_blog/1",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "show_blog", "1"]
+            },
+            "description": "Single blog detail — no pagination."
+          }
+        },
+        {
+          "name": "Show Brand Products — Page 1 (default)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/show_brand_products/1?page=1&items=20",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "show_brand_products", "1"],
+              "query": [
+                { "key": "page",  "value": "1",  "description": "Page number (default: 1)" },
+                { "key": "items", "value": "20", "description": "Items per page (default: 20)" }
+              ]
+            },
+            "description": "Returns a brand and its paginated published products.\n\n**Response shape:**\n```json\n{\n  \"brand\": { \"id\": 1, \"title_en\": \"Apple\", \"...\" },\n  \"pagination\": {\n    \"current_page\": 1,\n    \"total_pages\": 3,\n    \"total_count\": 50,\n    \"items_per_page\": 20,\n    \"next_page\": 2,\n    \"prev_page\": null\n  },\n  \"products\": [ { \"id\": 1, \"title_en\": \"iPhone\", \"...\" } ]\n}\n```"
+          }
+        },
+        {
+          "name": "Show Brand Products — Page 2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/show_brand_products/1?page=2&items=20",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "show_brand_products", "1"],
+              "query": [
+                { "key": "page",  "value": "2" },
+                { "key": "items", "value": "20" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All FAQs — Page 1 (default)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/get_all_faqs?page=1&items=20",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "get_all_faqs"],
+              "query": [
+                { "key": "page",  "value": "1",  "description": "Page number (default: 1)" },
+                { "key": "items", "value": "20", "description": "Items per page (default: 20)" }
+              ]
+            },
+            "description": "Returns paginated published FAQs.\n\n**Response shape:**\n```json\n{\n  \"pagination\": {\n    \"current_page\": 1,\n    \"total_pages\": 2,\n    \"total_count\": 35,\n    \"items_per_page\": 20,\n    \"next_page\": 2,\n    \"prev_page\": null\n  },\n  \"data\": [ { \"id\": 1, \"question_en\": \"...\", \"...\" } ]\n}\n```"
+          }
+        },
+        {
+          "name": "Get All FAQs — Page 2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/get_all_faqs?page=2&items=20",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "get_all_faqs"],
+              "query": [
+                { "key": "page",  "value": "2" },
+                { "key": "items", "value": "20" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Show FAQ (Public)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/web_site/show_faq/1",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "web_site", "show_faq", "1"]
+            },
+            "description": "Single FAQ detail — no pagination."
           }
         },
         {

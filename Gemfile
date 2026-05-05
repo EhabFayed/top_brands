@@ -15,6 +15,7 @@ gem 'enumerize', '~> 2.8', '>= 2.8.1'
 gem 'rack-cors'
 gem 'sidekiq', '~> 8.0', '>= 8.0.1'
 gem 'jwt'
+gem 'pagy', '~> 9.3'
 gem 'ruby-vips'
 gem "image_processing", "~> 1.2"
 gem "redis", ">= 4.0.1"

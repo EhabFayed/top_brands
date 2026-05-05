@@ -4,8 +4,11 @@ module Api
     before_action :set_blog, only: [:show, :update, :destroy]
 
     def index
-      @blogs = Blog.all
-      render json: serialize_blogs(@blogs)
+      @pagy, @blogs = pagy(Blog.includes(:blog_contents, :faqs).all, limit: params.fetch(:items, 20).to_i)
+      render json: {
+        pagination: pagination_metadata(@pagy),
+        data: @blogs.map { |b| serialize_blog(b) }
+      }
     end
 
     def show
@@ -55,7 +58,7 @@ module Api
     end
 
     def serialize_blogs(blogs)
-      blogs.includes(:blog_contents, :faqs).map { |b| serialize_blog(b) }
+      blogs.map { |b| serialize_blog(b) }
     end
 
     def serialize_blog(blog)

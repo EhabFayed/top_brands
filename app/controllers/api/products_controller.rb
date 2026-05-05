@@ -5,8 +5,11 @@ module Api
     before_action :set_product, only: [:show, :update, :destroy]
 
     def index
-      @products = Product.order(:display_order)
-      render json: @products.map { |p| product_json(p) }
+      @pagy, @products = pagy(Product.order(:display_order), limit: params.fetch(:items, 20).to_i)
+      render json: {
+        pagination: pagination_metadata(@pagy),
+        data: @products.map { |p| product_json(p) }
+      }
     end
 
     def show
