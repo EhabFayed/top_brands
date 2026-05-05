@@ -1,6 +1,6 @@
 {
   "info": {
-    "name": "Top Brand API - Full CRUD",
+    "name": "Top Brand API - Role-Based Access",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -8,17 +8,41 @@
       "name": "1. Authentication",
       "item": [
         {
-          "name": "Signup",
+          "name": "Signup - Create Editor (Manager token)",
           "request": {
             "method": "POST",
-            "header": [],
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
             "body": {
               "mode": "formdata",
               "formdata": [
-                { "key": "user[name]", "value": "Admin", "type": "text" },
-                { "key": "user[email]", "value": "admin@topbrand.com", "type": "text" },
+                { "key": "user[name]", "value": "New Editor", "type": "text" },
+                { "key": "user[email]", "value": "editor@topbrand.com", "type": "text" },
                 { "key": "user[password]", "value": "password123", "type": "text" },
                 { "key": "user[password_confirmation]", "value": "password123", "type": "text" },
+                { "key": "user[role]", "value": "editor", "type": "text", "description": "Manager can set: editor or manager. Admin can set: editor, manager, admin" },
+                { "key": "user[image]", "value": "", "type": "file" }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/signup",
+              "protocol": "http", "host": ["localhost"], "port": "3000",
+              "path": ["api", "signup"]
+            }
+          }
+        },
+        {
+          "name": "Signup - Create Manager (Admin token only)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "user[name]", "value": "New Manager", "type": "text" },
+                { "key": "user[email]", "value": "manager@topbrand.com", "type": "text" },
+                { "key": "user[password]", "value": "password123", "type": "text" },
+                { "key": "user[password_confirmation]", "value": "password123", "type": "text" },
+                { "key": "user[role]", "value": "manager", "type": "text", "description": "Only admin can create manager or admin users" },
                 { "key": "user[image]", "value": "", "type": "file" }
               ]
             },
@@ -48,7 +72,7 @@
       ]
     },
     {
-      "name": "2. Blogs (Admin)",
+      "name": "2. Blogs (Admin & Manager only)",
       "item": [
         {
           "name": "List Blogs",
@@ -131,7 +155,7 @@
       ]
     },
     {
-      "name": "2.5 Blog Contents (Admin)",
+      "name": "2.5 Blog Contents (Admin & Manager only)",
       "item": [
         {
           "name": "List Blog Content",
@@ -212,7 +236,7 @@
       ]
     },
     {
-      "name": "3. Sections (Admin)",
+      "name": "3. Sections (Admin & Manager only)",
       "item": [
         {
           "name": "List Sections",
@@ -296,7 +320,7 @@
       ]
     },
     {
-      "name": "4. Brands (Admin)",
+      "name": "4. Brands (Admin, Manager & Editor — delete: Admin & Manager only)",
       "item": [
         {
           "name": "List Brands",
@@ -379,7 +403,7 @@
       ]
     },
     {
-      "name": "5. Products (Admin)",
+      "name": "5. Products (Admin, Manager & Editor — delete: Admin & Manager only)",
       "item": [
         {
           "name": "List Products",
@@ -463,7 +487,7 @@
       ]
     },
     {
-      "name": "6. Faqs (Admin)",
+      "name": "6. Faqs (Admin & Manager only)",
       "item": [
         {
           "name": "List Faqs",
@@ -542,7 +566,7 @@
       ]
     },
     {
-      "name": "7. Users (Admin)",
+      "name": "7. Users (Admin & Manager)",
       "item": [
         {
           "name": "List Users",
@@ -569,7 +593,7 @@
           }
         },
         {
-          "name": "Update User",
+          "name": "Update User (incl. role change)",
           "request": {
             "method": "PATCH",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
@@ -577,6 +601,7 @@
               "mode": "formdata",
               "formdata": [
                 { "key": "user[name]", "value": "Updated Name", "type": "text" },
+                { "key": "user[role]", "value": "editor", "type": "text", "description": "Manager: can assign editor or manager only. Admin: any role. Omit to keep current role." },
                 { "key": "user[image]", "value": "", "type": "file" }
               ]
             },
@@ -588,7 +613,7 @@
           }
         },
         {
-          "name": "Delete User",
+          "name": "Delete User (Manager: non-admin only)",
           "request": {
             "method": "DELETE",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
@@ -602,7 +627,7 @@
       ]
     },
     {
-      "name": "8. Company Data (Admin)",
+      "name": "8. Company Data (Admin & Manager only)",
       "item": [
         {
           "name": "Show Company Data",

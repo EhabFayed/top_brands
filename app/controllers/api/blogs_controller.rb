@@ -1,5 +1,6 @@
 module Api
   class BlogsController < ApplicationController
+    before_action :require_admin_or_manager!
     before_action :set_blog, only: [:show, :update, :destroy]
 
     def index

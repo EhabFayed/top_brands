@@ -1,5 +1,6 @@
 module Api
   class FaqsController < ApplicationController
+    before_action :require_admin_or_manager!
     before_action :set_faq, only: [:show, :update, :destroy]
 
     def index

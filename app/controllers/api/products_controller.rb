@@ -1,5 +1,7 @@
 module Api
   class ProductsController < ApplicationController
+    before_action -> { require_role!(:admin, :manager, :editor) }, only: [:index, :show, :create, :update]
+    before_action :require_admin_or_manager!, only: [:destroy]
     before_action :set_product, only: [:show, :update, :destroy]
 
     def index
