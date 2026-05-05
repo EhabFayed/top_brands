@@ -1,6 +1,7 @@
 module Api
   class UsersController < ApplicationController
     include Rails.application.routes.url_helpers
+    before_action :require_admin_or_manager!
     before_action :set_user, only: [:show, :update, :destroy]
 
     def index
@@ -13,8 +14,11 @@ module Api
     end
 
     def update
-      unless @user.id == @current_user.id
-        return render json: { error: 'Unauthorized access' }, status: :unauthorized
+      requested_role = params.dig(:user, :role).to_s
+
+      # Managers can assign editor or manager roles, but not admin
+      if current_user.role.to_s == 'manager' && requested_role.present? && requested_role == 'admin'
+        return render json: { error: 'Managers cannot assign the admin role' }, status: :forbidden
       end
 
       if params[:user][:email].present? && params[:user][:email] != @user.email
@@ -30,8 +34,13 @@ module Api
     end
 
     def destroy
+      # Managers can only delete non-admin accounts
+      if current_user.role.to_s == 'manager' && @user.role.to_s == 'admin'
+        return render json: { error: 'Managers cannot delete admin accounts' }, status: :forbidden
+      end
+
       @user.destroy!
-      render json: {message: "User deleted successfully"}, status: :ok
+      render json: { message: "User deleted successfully" }, status: :ok
     end
 
     private
@@ -41,7 +50,7 @@ module Api
     end
 
     def user_update_params
-      params.require(:user).permit(:name, :password, :password_confirmation, :image, :phone_number)
+      params.require(:user).permit(:name, :password, :password_confirmation, :image, :phone_number, :role)
     end
 
     def user_response(user)
@@ -49,6 +58,7 @@ module Api
         id: user.id,
         name: user.name,
         email: user.email,
+        role: user.role,
         image_url: user.image.attached? ? url_for(user.image) : nil
       }
     end

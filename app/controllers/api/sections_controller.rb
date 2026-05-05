@@ -1,5 +1,6 @@
 module Api
   class SectionsController < ApplicationController
+    before_action :require_admin_or_manager!
     before_action :set_section, only: [:show, :update, :destroy]
 
     # GET /api/sections?page=home

@@ -6,14 +6,23 @@ module Api
       if params[:page].present?
         sections = Section.where(page: params[:page]).order(:position)
         if params[:page] == "home"
+          # Home: highlighted brands are a curated short list — no pagination needed
           brand = Brand.where(is_published: true, is_highlighted: true).all
-          render json: filter_by_locale({brands: serialize_brands(brand), sections: serialize_sections(sections)})
+          render json: filter_by_locale({ brands: serialize_brands(brand), sections: serialize_sections(sections) })
         elsif params[:page] == "brands"
-          brand = Brand.where(is_published: true).all
-          render json: filter_by_locale({brands: serialize_brands(brand), sections: serialize_sections(sections)})
+          pagy, brands = pagy(Brand.where(is_published: true), limit: params.fetch(:items, 20).to_i)
+          render json: filter_by_locale({
+            pagination: pagination_metadata(pagy),
+            brands:     serialize_brands(brands),
+            sections:   serialize_sections(sections)
+          })
         elsif params[:page] == "blogs"
-          blogs = Blog.where(is_published: true).all
-          render json: filter_by_locale({blogs: serialize_blogs(blogs), sections: serialize_sections(sections)})
+          pagy, blogs = pagy(Blog.where(is_published: true), limit: params.fetch(:items, 20).to_i)
+          render json: filter_by_locale({
+            pagination: pagination_metadata(pagy),
+            blogs:      serialize_blogs(blogs),
+            sections:   serialize_sections(sections)
+          })
         else
           render json: filter_by_locale(serialize_sections(sections))
         end
@@ -21,27 +30,43 @@ module Api
         render json: { errors: "Page not found" }, status: :not_found
       end
     end
+
     def get_all_blogs
-      blogs = Blog.where(is_published: true).all
-      render json: filter_by_locale(serialize_blogs(blogs))
+      pagy, blogs = pagy(Blog.where(is_published: true), limit: params.fetch(:items, 20).to_i)
+      render json: filter_by_locale({
+        pagination: pagination_metadata(pagy),
+        data:       serialize_blogs(blogs)
+      })
     end
+
     def show_blog
       blog = Blog.find(params[:id])
       render json: filter_by_locale(serialize_blog(blog))
     end
+
     def show_brand_products
-      brand = Brand.find(params[:id])
-      products = Product.where(brand_id: brand.id, is_published: true).all
-      render json: filter_by_locale({brand: serialize_brand(brand), products: serialize_products(products)})
+      brand    = Brand.find(params[:id])
+      pagy, products = pagy(Product.where(brand_id: brand.id, is_published: true), limit: params.fetch(:items, 20).to_i)
+      render json: filter_by_locale({
+        brand:      serialize_brand(brand),
+        pagination: pagination_metadata(pagy),
+        products:   serialize_products(products)
+      })
     end
+
     def get_all_faqs
-      faqs = Faq.where(is_published: true).all
-      render json: filter_by_locale(serialize_faqs(faqs))
+      pagy, faqs = pagy(Faq.where(is_published: true), limit: params.fetch(:items, 20).to_i)
+      render json: filter_by_locale({
+        pagination: pagination_metadata(pagy),
+        data:       serialize_faqs(faqs)
+      })
     end
+
     def show_faq
       faq = Faq.find(params[:id])
       render json: filter_by_locale(serialize_faq(faq))
     end
+
     def get_company_data
       company_data = CompanyDatum.first
       render json: filter_by_locale(serialize_company_data(company_data))

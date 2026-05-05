@@ -1,5 +1,6 @@
 module Api
   class CompanyDataController < ApplicationController
+    before_action :require_admin_or_manager!
     before_action :set_company_datum
 
     # GET /api/company_data

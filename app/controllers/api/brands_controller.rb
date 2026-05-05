@@ -1,10 +1,15 @@
 module Api
   class BrandsController < ApplicationController
+    before_action -> { require_role!(:admin, :manager, :editor) }, only: [:index, :show, :create, :update]
+    before_action :require_admin_or_manager!, only: [:destroy]
     before_action :set_brand, only: [:show, :update, :destroy]
 
     def index
-      @brands = Brand.try(:includes, :products).all
-      render json: serialize_brands(@brands)
+      @pagy, @brands = pagy(Brand.includes(:products).all, limit: params.fetch(:items, 20).to_i)
+      render json: {
+        pagination: pagination_metadata(@pagy),
+        data: serialize_brands(@brands)
+      }
     end
 
     def show
